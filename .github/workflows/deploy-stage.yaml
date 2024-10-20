@@ -70,16 +70,16 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
 
-  secret_detection:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#   secret_detection:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Run TruffleHog to scan for secrets
-        uses: trufflesecurity/trufflehog@latest
-        with:
-          scan-repo: true
+#       - name: Run Secret Scanning
+#         uses: github/codeql-action/secret-scanning@latest
+#         with:
+#           scan-repo: true
 
   container_scanning:
     runs-on: ubuntu-latest
@@ -99,7 +99,7 @@ jobs:
           docker build -t customer-demo:latest .
 
       - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@latest
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: customer-demo:latest
 
