@@ -48,13 +48,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Build with Maven
+        run: mvn clean install
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: java
-
-      - name: Build with Maven
-        run: mvn clean install
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
