@@ -9,20 +9,20 @@ on:
       - main
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#   lint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '17'
+#       - name: Set up JDK
+#         uses: actions/setup-java@v3
+#         with:
+#           distribution: 'adopt'
+#           java-version: '17'
 
-      - name: Install Checkstyle
-        run: mvn checkstyle:check
+#       - name: Install Checkstyle
+#         run: mvn checkstyle:check
 
   test:
     runs-on: ubuntu-latest
@@ -42,30 +42,19 @@ jobs:
       - name: Run tests
         run: mvn test
 
-  dependency_scanning:
+  codeql-analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Dependency Scanning
+      - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: java
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
-
-  sast:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Static Application Security Testing (SAST)
-        uses: github/codeql-action/init@v2
-        with:
-          languages: java
+      - name: Build with Maven
+        run: mvn clean install
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2

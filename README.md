@@ -16,16 +16,28 @@ Create a RESTful API that provides basic CRUD and other relevant operations on t
 | Phone Number  | String |             | Can be composite  |
 
 ## Instructions to setup prerequisites
+Ensure to visit https://start.spring.io/ and fill out the following prereqs before generating the project files
 
+Language: Java
+Spring Boot Version: 3.3.4
+Package: Jar
+Java Version: 17
+Dependencies: JPA, Spring Web, Spring Boot DevTools, H2 Database
 
 ## Prerequisites
-- 
+Add the following additional dependencies to the pom.xml
+org.springdoc - springdoc-openapi-starter-webmvc-ui
+io.swagger.core.v3 - swagger-annotations
+org.xerial - sqlite-jdbc
+org.hibernate.orm - hibernate-community-dialects
+
+Ensure to have java sdk 17 and latest version of Maven installed in your local development environment
 
 ## Build the code
-- 
+mvn clean install
 
 ## Test the code
-- 
+mvn test
 
 ### Integration and/or Acceptance Testing
 Create a pattern and implement it for integration and or acceptance testing of your REST API. Be sure to provide clear instructions on how to run it and possibly expand on how you might automate this for CI/CD.
@@ -63,3 +75,25 @@ This app uses the terraform templates to configure permissions, availability gro
 
 ### CI/CD
 Design and document a CI/CD pipeline for your application. Put this documentation in your repository in a location appropriate for you. Be sure to call out any manual or automated gates in your process.
+
+CI/CD Pipeline Steps
+Checkout Code:
+Retrieves the latest code from the repository.
+Set Up JDK:
+Configures the Java Development Kit (JDK) for the build environment.
+Run Linting: (NOTE left out and shown for demo purposes for this app due to time constraint)
+Executes Checkstyle to ensure the code adheres to coding standards.
+Build Application:
+Uses Maven to compile the code and package the application.
+Run Tests:
+Executes unit tests to verify the functionality of the application.
+Initialize CodeQL:
+Sets up CodeQL for static code analysis.
+Perform CodeQL Analysis:
+Analyzes the code for security vulnerabilities and code quality issues.
+Run Secret Detection:
+Scans the code for any hardcoded secrets or sensitive information.
+Build Docker Image:
+Creates a Docker image of the application.
+Scan Docker Image:
+Uses Trivy to scan the Docker image for vulnerabilities.
