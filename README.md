@@ -76,24 +76,24 @@ This app uses the terraform templates to configure permissions, availability gro
 ### CI/CD
 Design and document a CI/CD pipeline for your application. Put this documentation in your repository in a location appropriate for you. Be sure to call out any manual or automated gates in your process.
 
-CI/CD Pipeline Steps
-Checkout Code:
+#### CI/CD Pipeline Steps
+##### Checkout Code:
 Retrieves the latest code from the repository.
-Set Up JDK:
+##### Set Up JDK:
 Configures the Java Development Kit (JDK) for the build environment.
-Run Linting: (NOTE left out and shown for demo purposes for this app due to time constraint)
+##### Run Linting: (NOTE left out and shown for demo purposes for this app due to time constraint)
 Executes Checkstyle to ensure the code adheres to coding standards.
-Build Application:
+##### Build Application:
 Uses Maven to compile the code and package the application.
-Run Tests:
+##### Run Tests:
 Executes unit tests to verify the functionality of the application.
-Initialize CodeQL:
+##### Initialize CodeQL:
 Sets up CodeQL for static code analysis.
-Perform CodeQL Analysis:
+##### Perform CodeQL Analysis:
 Analyzes the code for security vulnerabilities and code quality issues.
-Run Secret Detection:
+##### Run Secret Detection: (disabled in lieu of using Github's integrated secret detection with email alerts setup.)
 Scans the code for any hardcoded secrets or sensitive information.
-Build Docker Image:
+##### Build Docker Image:
 Creates a Docker image of the application.
-Scan Docker Image:
+##### Scan Docker Image:
 Uses Trivy to scan the Docker image for vulnerabilities.
