@@ -54,13 +54,13 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Build with Maven
-        run: mvn clean install
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: java
+
+      - name: Build with Maven
+        run: mvn clean install
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
@@ -71,8 +71,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Secret Detection
-        uses: actions/secret-scan@v1
+      - name: Run TruffleHog to scan for secrets
+        uses: trufflesecurity/trufflehog@v3
+        with:
+          scan-repo: true
 
   container_scanning:
     runs-on: ubuntu-latest
@@ -92,7 +94,7 @@ jobs:
           docker build -t customer-demo:latest .
 
       - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.56.2
         with:
           image-ref: customer-demo:latest
 
