@@ -1,0 +1,26 @@
+{
+    "name": "Java Development Container",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "java.jdt.ls.java.home": "/usr/lib/jvm/java-17-openjdk"
+            },
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "Pivotal.vscode-spring-boot",
+                "vscjava.vscode-maven",
+                "vscjava.vscode-java-debug",
+                "vscjava.vscode-java-test",
+                "shengchen.vscode-checkstyle"
+            ]
+        }
+    },
+    "postCreateCommand": "mvn clean install",
+    "remoteUser": "vscode",
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=/mnt/hgfs/documents/1cjava/customer,target=/workspace,type=bind,consistency=cached"
+}
